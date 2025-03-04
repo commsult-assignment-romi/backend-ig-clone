@@ -1,6 +1,5 @@
 package com.commsult.romi.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +10,6 @@ import java.time.LocalDateTime;
 @Table(name = "comments")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Comment {
 
     @Id
@@ -31,4 +29,12 @@ public class Comment {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    // Custom constructor for adding a comment
+    public Comment(Post post, User user, String text) {
+        this.post = post;
+        this.user = user;
+        this.text = text;
+        this.createdAt = LocalDateTime.now();
+    }
 }

@@ -1,6 +1,5 @@
 package com.commsult.romi.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +10,6 @@ import java.time.LocalDateTime;
 @Table(name = "users")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
 
     @Id
@@ -29,6 +27,12 @@ public class User {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    // Custom constructor for registration (without id and createdAt)
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.createdAt = LocalDateTime.now();
+    }
 }
-
-

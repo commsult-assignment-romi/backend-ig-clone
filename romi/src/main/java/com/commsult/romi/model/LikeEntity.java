@@ -1,6 +1,5 @@
 package com.commsult.romi.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +10,6 @@ import java.time.LocalDateTime;
 @Table(name = "likes", uniqueConstraints = @UniqueConstraint(columnNames = {"post_id", "user_id"}))
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class LikeEntity {
 
     @Id
@@ -28,4 +26,11 @@ public class LikeEntity {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    // Custom constructor for creating a like
+    public LikeEntity(Post post, User user) {
+        this.post = post;
+        this.user = user;
+        this.createdAt = LocalDateTime.now();
+    }
 }

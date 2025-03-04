@@ -1,6 +1,5 @@
 package com.commsult.romi.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +12,6 @@ import java.util.List;
 @Table(name = "posts")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Post {
 
     @Id
@@ -38,4 +36,13 @@ public class Post {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
+
+    // Custom constructor for creating a post
+    public Post(User user, String imageUrl, String caption) {
+        this.user = user;
+        this.imageUrl = imageUrl;
+        this.caption = caption;
+        this.likeCount = 0;
+        this.createdAt = LocalDateTime.now();
+    }
 }
