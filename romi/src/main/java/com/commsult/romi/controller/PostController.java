@@ -5,19 +5,18 @@ import com.commsult.romi.model.Post;
 import com.commsult.romi.model.User;
 import com.commsult.romi.service.PostService;
 import com.commsult.romi.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
+@RequiredArgsConstructor
 public class PostController {
 
-    @Autowired
-    private PostService postService;
-
-    @Autowired
-    private UserService userService;
+    private final PostService postService;
+    private final UserService userService;
 
     @GetMapping
     public List<Post> getAllPosts() {

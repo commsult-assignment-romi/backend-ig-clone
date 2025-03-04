@@ -4,16 +4,16 @@ import com.commsult.romi.dto.LoginRequest;
 import com.commsult.romi.dto.RegisterRequest;
 import com.commsult.romi.model.User;
 import com.commsult.romi.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody RegisterRequest request) {
@@ -24,7 +24,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest request) {
         User user = userService.findByUsername(request.getUsername());
-        // This is a simple example. In production, compare hashed passwords and issue a token.
+        
         if (user.getPassword().equals(request.getPassword())) {
             return ResponseEntity.ok("Login successful");
         } else {
